@@ -7,7 +7,7 @@ class ImgsContainer extends Component {
         super();
         this.state = {
             data: [],
-            pictureNum: 25,
+            pictureNum: 1,
             value: '',
         }
     }
@@ -51,9 +51,9 @@ class ImgsContainer extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    {this._getImages(0,5)}
+                    {this._getImages(0,1)}
                 </div>
-                <div className="row">
+                {/*<div className="row">
                     {this._getImages(5,10)}
                 </div>
                 <div className="row">
@@ -64,7 +64,7 @@ class ImgsContainer extends Component {
                 </div>
                 <div className="row">
                     {this._getImages(20,25)}
-                </div>
+                </div>*/}
             </div>
         );
     }

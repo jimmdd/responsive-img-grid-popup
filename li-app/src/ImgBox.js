@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import ImgPop from './ImgPop';
+import ToggleButton from './ToggleButton';
 
 // function popModal(props) {
 //   const { id, title, albumid, url, style } = props;
@@ -26,14 +27,6 @@ import React, { Component } from 'react';
 // </div>
 // }
 
-// function descriptionForm(props) {
-//   return (
-//     <form >
-//       <input />
-//       <button>submit</button>
-//     </form>
-//   );
-// }
 
 class ImgBox extends Component {
 
@@ -42,31 +35,62 @@ class ImgBox extends Component {
     this.state = {
       value: '',
     }
+    this._handlePopClick = this._handlePopClick.bind(this);
+    this._hanldePopClose = this._handlePopClose.bind(this);
+    this._handleDescriptionChange = this._handleDescriptionChange.bind(this);
+    this._handleDescriptonSubmit = this._handleDescriptonSubmit.bind(this);
+    this._toggleForm = this._toggleForm.bind(this);
+    // this._saveDescriptions = this._saveDescriptions.bind(this);
+    this._getDescriptions = this._getDescriptions.bind(this);
   }
 
-  //get description of the img that user stored in local json stored by id
+ componentWillMount(){
+   this._getDescriptions();
+ }
+  //get photo descriptions from local storage
   _getDescriptions() {
-    return localStorage.getItem("description");
+    let des_key = "des_"+this.props.id;
+    let des_val = localStorage.getItem(des_key);
+    if(this.state.value==='')
+      this.setState({value:des_val});
   }
-  //save the description from user input
+
+  //save photo descriptions from user input
   _saveDescription() {
     let des_data = this.state.value;
-    localStorage.setItem("description", des_data);
+     if(des_data===''){
+      alert("Please enter your description!")
+    }else{
+      let des_key = "des_"+this.props.id;
+      localStorage.setItem(des_key, des_data);
+      
+    }
   }
 
   _handlePopClick() {
     console.log("click" + this.props.id);
     document.getElementById("modal").style.display = 'block';
   }
+
   _handlePopClose() {
     document.getElementById("modal").style.display = 'none';
   }
+
   _handleDescriptionChange(event) {
     this.setState({ value: event.target.value });
   }
+
   _handleDescriptonSubmit(event) {
     event.preventDefault();
+    this._toggleForm();
     this._saveDescription();
+  }
+
+ _toggleForm(){
+   let display = document.getElementById(this.props.id).style.display
+    display==='none' ?
+      display='block' :
+      display='none';
   }
 
   render() {
@@ -77,28 +101,48 @@ class ImgBox extends Component {
       title: this.props.title,
       style: 'display: block'
     }
-
+    console.log(localStorage.getItem("descriptions"));
     return (
       <div className="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-        <a type="button" onClick={this._handlePopClick.bind(this)}>
+        <a type="button" onClick={this._handlePopClick}>
           <img className="img-thumbnail"
             alt={this.props.title}
             src={this.props.thumbnailUrl} />
         </a>
         <div id={"modal"} className="container">
-          <span className="close" onClick={this._handlePopClose.bind(this)}>&times;</span>
+          <span className="close" onClick={this._handlePopClose}>&times;</span>
           <img className="modal-img img-responsive" id={this.props.id}
             src={this.props.url} alt={this.props.title} />
           <div id="title">
-            <h5>{this.props.title}</h5>
+            <h4 className = "text-center" >{this.props.title}</h4>
+             <p className = "text-center" >{this.state.value}</p>
+
+            <form onSubmit={this._handleDescriptonSubmit}>
+
+              <div className="form-group">
+                <div id = "des-form">
+              <textarea className="form-control btn-block" rows="3" 
+                placeholder="Write your Description Here" 
+                value={this.state.value} 
+                onChange={this._handleDescriptionChange} 
+                />
+                 <p>
+              <button type ="button" className="btn btn-danger">Cancel</button>
+              <button type="submit" 
+              className="btn btn-success">Save</button>
+              </p>
+              </div>
+
+              {/*TO-DO pass state to the ToggleButton*/}
+              <ToggleButton class ="btn btn-primary" 
+                on="Add/Edit Description"
+                off="Save Description"
+                id = "des-form"/>
+           
+              
+              </div>
+            </form>
           </div>
-          <div id="description">
-            <form onSubmit={this._handleDescriptonSubmit.bind(this)}>
-              <label>Add new description here</label>
-              <input placeholder="Write your Description" value={this.state.value} onChange={this._handleDescriptionChange.bind(this)} />
-              <button className="btn btn-default" type="submit">Save</button>
-            </form>);
-            </div>
         </div>
       </div>
     );
