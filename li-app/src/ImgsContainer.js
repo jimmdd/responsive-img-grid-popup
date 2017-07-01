@@ -1,32 +1,57 @@
 import React, { Component } from 'react';
 import ImgBox from './ImgBox';
+import jQuery from 'jquery';
 
 class ImgsContainer extends Component {
-constructor(){
-    super();
-    this.state = {
-        data: [],
-        pictureNum: 25,
-        value: '',
+    constructor() {
+        super();
+        this.state = {
+            data: [],
+            pictureNum: 25,
+            value: '',
+        }
     }
-}
 
-componentWillMount(){
+    //wait for fetchdata finish
+    componentWillMount() {
+        this._fetchData();
+    }
 
-}
+    //Jquery version of fetchdata
+    _fetchData() {
+        jQuery.ajax({
+            method: 'GET',
+            url: this.props.url,
+            dataType: 'json',
+            success: (data) => {
+                this.setState({ data });
+            }
+        });
 
-_getImages(){
-    //TO-DO get data and map it and return img box
-}
-_fetchImages(){
-    return <ImgBox />
-}
+    }
+
+    _getImages() {
+       // let count = 1;
+        return this.state.data.slice(0,this.state.pictureNum).map((d) => {
+            let imgBox = <ImgBox
+                    albumID={d.albumId}
+                    id={d.id}
+                    key={d.id}
+                    title={d.title}
+                    url={d.url}
+                    thumbnailUrl={d.thumbnailUrl} /> ;
+                //TO-DO every 5 box in a row
+                return imgBox;
+            
+        });
+
+    }
 
     render() {
         return (
-            <div className='container'>
+            <div className="container-fluid">
                 <div className="row">
-                {this._fetchImages()}
+                    {this._getImages()}
                 </div>
             </div>
         );
