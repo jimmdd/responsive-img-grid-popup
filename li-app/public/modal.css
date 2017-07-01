@@ -71,12 +71,5 @@
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
-}
-
-/* 100% Image Width on Smaller Screens OPTINONAL */
-@media only screen and (max-width: 700px){
-    .modal-content {
-        width: 100%;
-    }
 
 }
