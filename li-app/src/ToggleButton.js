@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ToggleButton extends React.Component {
+class ToggleButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +13,7 @@ class ToggleButton extends React.Component {
     this._changeType = this._changeType.bind(this);
     this._toggleForm = this._toggleForm.bind(this);
   }
+
   componentDidMount(){
    this._toggleForm();
   }
