@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImgBox from './ImgBox';
+import Thumbnail from './Thumbnail';
 
 class ImgsContainer extends Component {
     constructor() {
@@ -35,13 +35,16 @@ class ImgsContainer extends Component {
 
         _getImages() {
             return this.state.data.slice(0, this.props.picNum).map((d) => {
-                return <ImgBox
+                return (
+                         <Thumbnail 
                             albumID={d.albumId}
                             id={d.id}
                             key={d.id}
                             title={d.title}
                             url={d.url}
-                            thumbnailUrl={d.thumbnailUrl} />;
+                            thumbnailUrl={d.thumbnailUrl}
+                         />
+                )
             });
         }
     
