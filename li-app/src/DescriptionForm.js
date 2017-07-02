@@ -25,7 +25,7 @@ class DescriptionForm extends Component {
 
     //get photo descriptions from local storage
     _getDescriptions() {
-        let des_key = "des_" + this.props.albumId+this.props.id;
+        let des_key = "des_" + this.props.id;
         let des_val = localStorage.getItem(des_key);
         if (this.state.value === "" && des_val != null)
             this.setState({ value: des_val });
@@ -37,7 +37,7 @@ class DescriptionForm extends Component {
         if (des_data === "") {
             alert("Please enter your description!")
         } else {
-            let des_key = "des_" + this.props.albumId+this.props.id;
+            let des_key = "des_" + this.props.id;
             localStorage.setItem(des_key, des_data);
             //update parent's decription
             this.props.des_get(des_data);

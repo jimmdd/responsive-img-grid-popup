@@ -19,7 +19,7 @@ class Modal extends Component {
 
     //get photo descriptions from local storage
     _getDescriptions() {
-        let des_key = "des_" + this.props.albumId+this.props.id;
+        let des_key = "des_" +this.props.id;
         let des_val = localStorage.getItem(des_key);
         if (this.state.value === "" && des_val != null)
             this.setState({ value: des_val });
@@ -46,7 +46,6 @@ class Modal extends Component {
     }
 
     render() {
-        console.log(this.props.albumId);
         return (
                 <a onClick={this._handleModalClose} style={{textDecoration: "none"}}>
 
@@ -62,7 +61,6 @@ class Modal extends Component {
                     {
                         this.state.isToggleOn ?
                             <DescriptionForm id={this.props.id}
-                                albumId = {this.props.albumId}
                                 des_get={this._getDescriptionFromChild.bind(this)}
                                 close={this._changeToggle}
                             />

@@ -33,7 +33,6 @@ class ImgsContainer extends Component {
         return this.state.data.slice(0, this.props.picNum).map((d) => {
             return (
                 <Thumbnail
-                    albumID={d.albumId}
                     id={d.id}
                     key={d.id}
                     title={d.title}
