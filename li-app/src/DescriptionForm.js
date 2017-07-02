@@ -4,7 +4,7 @@ class DescriptionForm extends Component {
     constructor() {
         super();
         this.state = {
-            value: "",
+            value: ""
         }
         this._handleDescriptionChange = this._handleDescriptionChange.bind(this);
         this._handleDescriptonSubmit = this._handleDescriptonSubmit.bind(this);
@@ -16,7 +16,7 @@ class DescriptionForm extends Component {
         this._getDescriptions();
     }
     _handleDescriptionChange(event) {
-        this.setState({ value: event.target.value });
+        this.setState({ value: event.target.value});
     }
     _handleDescriptonSubmit(event) {
         event.preventDefault();
@@ -25,7 +25,7 @@ class DescriptionForm extends Component {
 
     //get photo descriptions from local storage
     _getDescriptions() {
-        let des_key = "des_" + this.props.id;
+        let des_key = "des_" + this.props.albumId+this.props.id;
         let des_val = localStorage.getItem(des_key);
         if (this.state.value === "" && des_val != null)
             this.setState({ value: des_val });
@@ -37,7 +37,7 @@ class DescriptionForm extends Component {
         if (des_data === "") {
             alert("Please enter your description!")
         } else {
-            let des_key = "des_" + this.props.id;
+            let des_key = "des_" + this.props.albumId+this.props.id;
             localStorage.setItem(des_key, des_data);
             //update parent's decription
             this.props.des_get(des_data);
@@ -53,7 +53,7 @@ class DescriptionForm extends Component {
         return (
             <form onSubmit={this._handleDescriptonSubmit}>
                 <div className="form-group">
-                    <div id="des-form">
+                    <div id="des-open">
                         <textarea id ="des-open" className="form-control btn-block" rows="3"
                             placeholder="Write your Description Here"
                             value={this.state.value}
