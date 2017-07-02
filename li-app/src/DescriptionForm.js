@@ -20,7 +20,6 @@ class DescriptionForm extends Component {
     }
     _handleDescriptonSubmit(event) {
         event.preventDefault();
-        //this._toggleForm();
         this._saveDescription();
     }
 
@@ -55,17 +54,17 @@ class DescriptionForm extends Component {
             <form onSubmit={this._handleDescriptonSubmit}>
                 <div className="form-group">
                     <div id="des-form">
-                        <textarea className="form-control btn-block" rows="3"
+                        <textarea id ="des-open" className="form-control btn-block" rows="3"
                             placeholder="Write your Description Here"
                             value={this.state.value}
                             onChange={this._handleDescriptionChange}
                             autoFocus
                         />
                         <p>
-                            <button type="button" className="btn btn-danger"
+                            <button id = "des-open" type="button" className="btn btn-danger"
                                 onClick={this._cancelEdit}
                             >Cancel</button>
-                            <button type="submit" className="btn btn-success">Save</button>
+                            <button id = "des-open" type="submit" className="btn btn-success">Save</button>
                         </p>
                     </div>
                 </div>
