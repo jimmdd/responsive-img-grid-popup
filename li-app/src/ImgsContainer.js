@@ -46,7 +46,9 @@ class ImgsContainer extends Component {
     render() {
         return (
             <div className="grid-container">
-                {this._getImages()}
+                <div className="grid-100 align-center">
+                    {this._getImages()}
+                </div>
             </div>
         );
     }

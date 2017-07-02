@@ -19,7 +19,7 @@ class Thumbnail extends Component {
     render() {
         return (
             <div className="grid-20 mobile-grid-50">
-                <a type="button" onClick={this._handleImgClick}>
+                <a  onClick={this._handleImgClick}>
                     <img className="img-thumbnail"
                         alt={this.props.title}
                         src={this.props.thumbnailUrl} />
@@ -30,7 +30,7 @@ class Thumbnail extends Component {
                         title={this.props.title}
                         url={this.props.url}
                         close={this._closeModal}
-                    /> : <div></div>
+                    /> : <div id="nth"></div>
                 }
             </div>
         );

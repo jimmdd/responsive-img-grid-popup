@@ -53,7 +53,7 @@ class DescriptionForm extends Component {
         return (
             <form onSubmit={this._handleDescriptonSubmit}>
                 <div className="form-group">
-                    <div id="des-open">
+                    <div id="des-form">
                         <textarea id ="des-open" className="form-control btn-block" rows="3"
                             placeholder="Write your Description Here"
                             value={this.state.value}
